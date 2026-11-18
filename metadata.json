@@ -1,0 +1,6 @@
+{
+  "name": "Amanat — Gender Disinformation & Digital Safety Guide",
+  "description": "An editorial digital safety and awareness platform focused on gender disinformation, deepfakes, online blackmail, fact-checking, and support resources for India and Jammu & Kashmir.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
