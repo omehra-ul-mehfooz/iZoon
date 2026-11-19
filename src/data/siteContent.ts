@@ -1,6 +1,7 @@
 import type {
   CommunityOrganisation,
   HelplineEntry,
+  InstitutionalResource,
   RemovalPathway,
   SectionSummary,
   SiteMetadata,
@@ -14,7 +15,7 @@ export const SITE_METADATA: SiteMetadata = {
   quickExitNote:
     'Quick Exit navigates away immediately to a neutral page (Wikipedia). It does not erase your browser history or guarantee device privacy.',
   quickExitUrl: 'https://en.wikipedia.org/wiki/Main_Page',
-  correctionsEmailPlaceholder: 'corrections-placeholder@izoon-guide.org',
+  correctionsEmailPlaceholder: 'iZoon222@gmail.com',
   regionalFocusNote:
     'Prepared for readers across India with specific context for Jammu and Kashmir.',
 };
@@ -300,6 +301,62 @@ export const JK_WOMEN_CENTRED_ORGANISATIONS: CommunityOrganisation[] = [
     contactPageLabel: 'Contact Page',
     note: 'Livelihood and empowerment programmes should not be treated as equivalent to legal representation or specialist GBV case management.',
     sourceLabel: 'Source: helpfoundation.live & official contact page',
+  },
+];
+
+export const JK_POLICE_AND_UNIVERSITY_RESOURCES: InstitutionalResource[] = [
+  {
+    id: 'jk-police-women-stations',
+    group: 'police-women',
+    name: 'J&K Police — Women Police Stations',
+    categoryLabel: 'Official J&K Police Resource',
+    statusLabel: 'Confirm details on official site',
+    description: 'Official J&K Police resource concerning women police stations.',
+    officialUrl: 'https://www.jkpolice.gov.in/Women-Police-Stations',
+    officialLinkLabel: 'Visit Official J&K Police Page',
+    institutionalNote:
+      'Please visit the official J&K Police website to confirm current contact details, availability and procedures.',
+  },
+  {
+    id: 'jk-police-special-women',
+    group: 'police-women',
+    name: 'J&K Police — Special Women',
+    categoryLabel: 'Official J&K Police Resource',
+    statusLabel: 'Confirm details on official site',
+    description: 'Official J&K Police resource concerning special women-related police support.',
+    officialUrl: 'https://www.jkpolice.gov.in/specialwomen',
+    officialLinkLabel: 'Visit Official J&K Police Page',
+    institutionalNote:
+      'Please visit the official J&K Police website to confirm current contact details, availability and procedures.',
+  },
+  {
+    id: 'uok-icc',
+    group: 'university-campus',
+    name: 'University of Kashmir — Internal Complaints Committee (ICC)',
+    categoryLabel: 'University Institutional Resource',
+    statusLabel: 'Institutional resource · Not 24/7',
+    description:
+      "Official University of Kashmir resource for its Internal Complaints Committee. Intended for people covered by the university's applicable institutional procedures. Visitors should consult the official page for current contact details and complaint procedures.",
+    officialUrl: 'https://icc.uok.edu.in/Main/Default.aspx',
+    officialLinkLabel: 'Visit Official ICC Page',
+    institutionalNote:
+      "This is a University of Kashmir institutional resource, not a general public emergency service. Students should check the university's current procedures and eligibility.",
+  },
+  {
+    id: 'ju-cash',
+    group: 'university-campus',
+    name: 'University of Jammu — Committee Against Sexual Harassment (CASH)',
+    categoryLabel: 'University Institutional Resource',
+    statusLabel: 'Institutional resource · Not 24/7',
+    description:
+      'Official University of Jammu resource concerning its Committee Against Sexual Harassment and institutional procedures.',
+    publishedContactNote: 'The official page currently publishes:',
+    phones: [{ label: 'Convener contact', number: '+91 90860 03468' }],
+    email: { label: 'University helpdesk email', address: 'helpdesk@jammuuniversity.ac.in' },
+    officialUrl: 'https://www.jammuuniversity.ac.in/cash',
+    officialLinkLabel: 'Visit Official CASH Page',
+    institutionalNote:
+      "This is a University of Jammu institutional resource, not a general public emergency service or a 24/7 helpline. Students should check the university's current procedures and eligibility.",
   },
 ];
 

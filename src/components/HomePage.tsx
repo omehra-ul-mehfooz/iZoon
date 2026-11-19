@@ -7,6 +7,7 @@ import {
   Eye,
   HeartHandshake,
   ImageOff,
+  Mail,
   Phone,
   PhoneCall,
   ScanFace,
@@ -78,6 +79,7 @@ const SECTION_CARD_THEME: Record<
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const sections = contentRepository.getSections();
+  const metadata = contentRepository.getSiteMetadata();
 
   const handleExploreResources = () => {
     const target = document.getElementById('explore-resources');
@@ -309,80 +311,186 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Band 4: Why This Matters */}
+      {/* Band 4: About iZoon */}
       <section
         id="why-matters"
-        aria-labelledby="why-matters-heading"
+        aria-labelledby="about-izoon-heading"
         className="bg-[#F4ECE2] border-b border-[#E5D9CA] scroll-mt-20"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5 space-y-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#68182C]">
-                Why This Matters
-              </p>
-              <h2
-                id="why-matters-heading"
-                className="font-serif text-3xl sm:text-4xl font-medium text-[#1C1518] leading-tight"
-              >
-                Online falsehoods carry offline consequences.
-              </h2>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-8 sm:space-y-10">
+          {/* Section Header: About iZoon */}
+          <div className="pb-8 border-b border-[#D8C7B4] max-w-3xl space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#68182C]">
+              About iZoon
+            </p>
+            <h2
+              id="about-izoon-heading"
+              className="font-serif text-3xl sm:text-4xl font-medium text-[#1C1518] leading-tight"
+            >
+              Making digital spaces safer, one informed step at a time.
+            </h2>
+          </div>
 
-              <blockquote className="py-5 border-y border-[#D8C7B4] font-serif italic text-xl leading-relaxed text-[#4A1020]">
-                “When rumours, altered images, or intimidation are aimed at women, fear often
-                silences the person targeted long before facts are checked.”
-              </blockquote>
-
-              <p className="text-sm leading-relaxed text-[#4C3F44]">
-                Across India—and acutely within closely connected towns, campuses, and
-                neighbourhoods in Jammu and Kashmir—social pressure can make it difficult to tell
-                family or report abuse. Clear, calm knowledge restores room to breathe.
-              </p>
+          {/* Row 1: Our Story & Our Mission */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+            <div className="lg:col-span-7 rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 sm:p-8 space-y-4">
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#68182C]">
+                01 · Context
+              </div>
+              <h3 className="font-serif text-2xl font-medium text-[#1C1518]">Our Story</h3>
+              <div className="space-y-3.5 text-sm sm:text-base leading-relaxed text-[#4C3F44]">
+                <p>
+                  iZoon began as a student-led initiative by first-semester students of Design Your
+                  Degree (DYD) at the University of Kashmir.
+                </p>
+                <p>
+                  As digital platforms become an increasingly important part of everyday life,
+                  online spaces also bring challenges such as gender disinformation, online
+                  harassment, impersonation, deepfakes and digital blackmail.
+                </p>
+                <p>
+                  We recognised the need for accessible, understandable and reliable information
+                  that helps people recognise these challenges, make informed decisions and find
+                  appropriate support.
+                </p>
+                <p className="font-medium text-[#1C1518]">That is the idea behind iZoon.</p>
+              </div>
             </div>
 
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 space-y-2.5">
-                <div className="font-mono text-xs text-[#68182C]">01 · Reputational targeting</div>
-                <h3 className="font-serif text-lg font-medium text-[#1C1518]">
-                  Shaming used to silence voices
-                </h3>
-                <p className="text-sm leading-relaxed text-[#4C3F44]">
-                  Gender disinformation relies on doctored screenshots, invented quotes, and moral
-                  rumours to push women and gender-diverse people out of classrooms, workplaces,
-                  and civic life.
+            <div className="lg:col-span-5 rounded-xl border border-[#DFD1BF] bg-[#FFFFFF] p-6 sm:p-8 flex flex-col justify-between gap-6">
+              <div className="space-y-4">
+                <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#68182C]">
+                  02 · Purpose
+                </div>
+                <h3 className="font-serif text-2xl font-medium text-[#1C1518]">Our Mission</h3>
+                <p className="text-sm sm:text-base leading-relaxed text-[#4C3F44]">
+                  Our mission is to promote digital awareness and make reliable safety information
+                  and support resources easier to understand and access, particularly in the context
+                  of Jammu &amp; Kashmir and the wider Indian digital environment.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 space-y-2.5">
-                <div className="font-mono text-xs text-[#68182C]">02 · Regional urgency</div>
-                <h3 className="font-serif text-lg font-medium text-[#1C1518]">
-                  Rapid spread in tight-knit networks
+              <p className="pt-5 border-t border-[#E5D9CA] text-xs leading-relaxed text-[#5E4E54]">
+                {metadata.regionalFocusNote}
+              </p>
+            </div>
+          </div>
+
+          {/* Row 2: What We Do & Our Approach */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+            <div className="lg:col-span-6 rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 sm:p-8 space-y-4">
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#68182C]">
+                03 · Six Chapters
+              </div>
+              <h3 className="font-serif text-2xl font-medium text-[#1C1518]">What We Do</h3>
+              <p className="text-sm sm:text-base leading-relaxed text-[#4C3F44]">
+                Through six educational chapters, iZoon brings together:
+              </p>
+              <ul className="space-y-2.5 text-sm leading-relaxed text-[#4C3F44]">
+                {[
+                  'Awareness about misinformation, disinformation and gender disinformation.',
+                  'Guidance on responding to online threats, harassment and blackmail.',
+                  'National helplines and regional support directories.',
+                  'Awareness and safety information about deepfakes.',
+                  'Practical methods for checking suspicious information.',
+                  'Guidance on image-removal resources and available reporting options.',
+                ].map((item, idx) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="font-mono text-xs font-semibold tabular-nums text-[#68182C] pt-0.5 shrink-0">
+                      0{idx + 1}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:col-span-6 rounded-xl border border-[#CFDDD4] bg-[#F6F9F7] p-6 sm:p-8 space-y-4">
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#1D4D3A]">
+                04 · Editorial Standards
+              </div>
+              <h3 className="font-serif text-2xl font-medium text-[#1C1518]">Our Approach</h3>
+              <p className="text-sm sm:text-base leading-relaxed text-[#3B4A42]">
+                We believe digital safety information should be understandable, responsible and
+                transparent.
+              </p>
+              <p className="text-sm font-medium text-[#1C1518]">We aim to:</p>
+              <ul className="space-y-2.5 text-sm leading-relaxed text-[#3B4A42]">
+                {[
+                  'Prioritise official and credible sources.',
+                  'Clearly distinguish verified information from resources awaiting local confirmation.',
+                  'Avoid presenting unverified contacts as confirmed support services.',
+                  'Encourage users to consult relevant authorities and organisations for current procedures.',
+                  'Improve the platform as information changes and corrections are identified.',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <CheckCircle2
+                      className="w-4 h-4 text-[#1D4D3A] shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Row 3: Who We Are & Help Us Improve iZoon */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+            <div className="lg:col-span-7 rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 sm:p-8 flex flex-col justify-between gap-5">
+              <div className="space-y-4">
+                <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#68182C]">
+                  05 · Independent Initiative
+                </div>
+                <h3 className="font-serif text-2xl font-medium text-[#1C1518]">Who We Are</h3>
+                <div className="space-y-3 text-sm sm:text-base leading-relaxed text-[#4C3F44]">
+                  <p>
+                    iZoon is an independent, student-led educational initiative developed by
+                    first-semester students of Design Your Degree (DYD), University of Kashmir.
+                  </p>
+                  <p>
+                    It is an awareness and information platform, not a government organisation,
+                    law-enforcement service, university authority or emergency response service.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#E5D9CA] flex items-start gap-2.5 text-xs leading-relaxed text-[#5E4E54]">
+                <ShieldAlert className="w-4 h-4 text-[#68182C] shrink-0 mt-0.5" aria-hidden="true" />
+                <p>{metadata.disclaimerText}</p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 rounded-xl border border-[#DFD1BF] bg-[#FFFFFF] p-6 sm:p-8 flex flex-col justify-between gap-5">
+              <div className="space-y-3">
+                <div className="font-mono text-xs uppercase tracking-[0.12em] text-[#68182C]">
+                  06 · Corrections &amp; Feedback
+                </div>
+                <h3 className="font-serif text-2xl font-medium text-[#1C1518]">
+                  Help Us Improve iZoon
                 </h3>
                 <p className="text-sm leading-relaxed text-[#4C3F44]">
-                  In Jammu and Kashmir as across India, forwarded clips and screenshots circulate
-                  rapidly on private messaging groups—often outrunning context or correction.
+                  Have you noticed an outdated contact, broken link or factual error? We welcome
+                  corrections and suggestions.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 space-y-2.5">
-                <div className="font-mono text-xs text-[#68182C]">03 · Synthetic manipulation</div>
-                <h3 className="font-serif text-lg font-medium text-[#1C1518]">
-                  Ordinary photos turned into deepfakes
-                </h3>
-                <p className="text-sm leading-relaxed text-[#4C3F44]">
-                  Public profile photos can be altered without consent using automated tools.
-                  Understanding how synthetic media is made helps shift blame back onto abusers.
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-[#DFD1BF] bg-[#FAF7F2] p-6 space-y-2.5">
-                <div className="font-mono text-xs text-[#68182C]">04 · Practical agency</div>
-                <h3 className="font-serif text-lg font-medium text-[#1C1518]">
-                  Actionable steps reduce panic
-                </h3>
-                <p className="text-sm leading-relaxed text-[#4C3F44]">
-                  Knowing what screenshots to preserve, where to report, and how to use hash-based
-                  removal tools gives individuals concrete options without panic.
+              <div className="rounded-lg border border-[#E5D9CA] bg-[#FAF7F2] p-4 sm:p-5 space-y-2.5">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#1C1518]">
+                  <Mail className="w-4 h-4 text-[#68182C] shrink-0" aria-hidden="true" />
+                  <span>Project Contact &amp; Corrections</span>
+                </div>
+                <div>
+                  <a
+                    href={`mailto:${metadata.correctionsEmailPlaceholder}`}
+                    className="font-mono text-sm font-medium text-[#68182C] underline underline-offset-2 break-all hover:text-[#4A1020]"
+                  >
+                    {metadata.correctionsEmailPlaceholder}
+                  </a>
+                </div>
+                <p className="text-xs leading-relaxed text-[#5E4E54] pt-2 border-t border-[#E5D9CA]">
+                  This email is for general project communication and website corrections. It is not
+                  an emergency helpline or confidential incident-reporting channel.
                 </p>
               </div>
             </div>

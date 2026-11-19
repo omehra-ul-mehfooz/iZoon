@@ -500,10 +500,11 @@ export const Layout: React.FC<LayoutProps> = ({
 
               <div>
                 <div className="font-semibold text-[#1E181A] mb-1">
-                  Corrections &amp; Local Updates
+                  iZoon — Project Contact &amp; Corrections
                 </div>
-                <p className="mb-1">
-                  To report an outdated number or suggest a verified regional listing:
+                <p className="mb-1.5">
+                  For website corrections, broken links, factual updates, and general project
+                  feedback, contact the iZoon team at this email address.
                 </p>
                 <a
                   href={`mailto:${metadata.correctionsEmailPlaceholder}`}
@@ -511,8 +512,10 @@ export const Layout: React.FC<LayoutProps> = ({
                 >
                   {metadata.correctionsEmailPlaceholder}
                 </a>
-                <p className="mt-1 text-[11px] text-[#5A4D52]">
-                  [Placeholder contact email — replace with verified editorial inbox before launch]
+                <p className="mt-1.5 text-[11px] text-[#5A4D52]">
+                  This email is not an emergency helpline, counselling service, or confidential
+                  incident-reporting channel. For urgent assistance, use the official support
+                  resources listed on this website.
                 </p>
               </div>
 

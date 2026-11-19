@@ -52,6 +52,21 @@ export interface CommunityOrganisation {
   sourceLabel: string;
 }
 
+export interface InstitutionalResource {
+  id: string;
+  group: 'police-women' | 'university-campus';
+  name: string;
+  categoryLabel: string;
+  statusLabel: string;
+  description: string;
+  officialUrl: string;
+  officialLinkLabel: string;
+  publishedContactNote?: string;
+  phones?: { label: string; number: string }[];
+  email?: { label: string; address: string };
+  institutionalNote: string;
+}
+
 export interface RemovalPathway {
   id: string;
   platform: string;

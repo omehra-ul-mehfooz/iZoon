@@ -1,5 +1,6 @@
 import {
   HELPLINE_ENTRIES,
+  JK_POLICE_AND_UNIVERSITY_RESOURCES,
   JK_WOMEN_CENTRED_ORGANISATIONS,
   MAIN_SECTIONS,
   REMOVAL_PATHWAYS,
@@ -8,6 +9,7 @@ import {
 import type {
   CommunityOrganisation,
   HelplineEntry,
+  InstitutionalResource,
   RemovalPathway,
   SectionSlug,
   SectionSummary,
@@ -40,6 +42,10 @@ export const contentRepository = {
 
   getCommunityOrganisations(): CommunityOrganisation[] {
     return JK_WOMEN_CENTRED_ORGANISATIONS;
+  },
+
+  getPoliceAndUniversityResources(): InstitutionalResource[] {
+    return JK_POLICE_AND_UNIVERSITY_RESOURCES;
   },
 
   getRemovalPathways(): RemovalPathway[] {

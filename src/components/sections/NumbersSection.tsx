@@ -5,11 +5,13 @@ import {
   CheckCircle2,
   Copy,
   ExternalLink,
+  GraduationCap,
   Info,
   Mail,
   MapPin,
   Phone,
   Search,
+  Shield,
   Users,
 } from 'lucide-react';
 import { contentRepository } from '../../services/contentRepository';
@@ -30,6 +32,7 @@ const FILTER_TABS: { id: CategoryFilter; label: string }[] = [
 export const NumbersSection: React.FC = () => {
   const helplines = contentRepository.getHelplines();
   const communityOrganisations = contentRepository.getCommunityOrganisations();
+  const institutionalResources = contentRepository.getPoliceAndUniversityResources();
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -66,6 +69,34 @@ export const NumbersSection: React.FC = () => {
         (org.email && org.email.toLowerCase().includes(query)),
     );
   }, [communityOrganisations, searchTerm]);
+
+  const filteredPoliceResources = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+    const policeItems = institutionalResources.filter((item) => item.group === 'police-women');
+    if (query.length === 0) return policeItems;
+    return policeItems.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.officialUrl.toLowerCase().includes(query),
+    );
+  }, [institutionalResources, searchTerm]);
+
+  const filteredUniversityResources = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+    const universityItems = institutionalResources.filter(
+      (item) => item.group === 'university-campus',
+    );
+    if (query.length === 0) return universityItems;
+    return universityItems.filter(
+      (item) =>
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.officialUrl.toLowerCase().includes(query) ||
+        (item.phones && item.phones.some((p) => p.number.toLowerCase().includes(query))) ||
+        (item.email && item.email.address.toLowerCase().includes(query)),
+    );
+  }, [institutionalResources, searchTerm]);
 
   const handleCopy = async (id: string, value: string) => {
     try {
@@ -449,6 +480,222 @@ export const NumbersSection: React.FC = () => {
               ))}
             </div>
           )}
+        </section>
+
+        {/* Separate Section: Police & University Support in Jammu & Kashmir */}
+        <section
+          aria-labelledby="jk-police-university-heading"
+          className="mt-14 pt-10 border-t border-[#CFDDD4] space-y-8"
+        >
+          <div className="space-y-2 max-w-3xl">
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-[#1D4D3A] font-semibold">
+              <Shield className="w-4 h-4" aria-hidden="true" />
+              <span>Official Police &amp; Institutional Directory Links</span>
+            </div>
+            <h2
+              id="jk-police-university-heading"
+              className="font-serif text-2xl sm:text-3xl font-medium text-[#19211D]"
+            >
+              Police &amp; University Support in Jammu &amp; Kashmir
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-[#536159]">
+              Official J&amp;K Police webpages and university institutional committees in Jammu
+              &amp; Kashmir, listed separately from national helplines, 24/7 services, and
+              community organisations.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-[#D9CFC0] bg-[#FAF7F0] p-4 flex items-start gap-3 text-xs sm:text-sm leading-relaxed text-[#3B4A42]">
+            <Info className="w-4 h-4 text-[#8C4A1C] shrink-0 mt-0.5" aria-hidden="true" />
+            <p>
+              <strong>Independent awareness note:</strong> iZoon is not officially affiliated with
+              J&amp;K Police, the University of Kashmir, or the University of Jammu. These links are
+              not 24/7 emergency helplines; please check each official website directly for current
+              contact details, eligibility, and procedures.
+            </p>
+          </div>
+
+          {/* Group 1: Police & Women-Centred Support */}
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#1D4D3A] font-semibold">
+                <Shield className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Group 1</span>
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl font-medium text-[#19211D]">
+                1. Police &amp; Women-Centred Support
+              </h3>
+              <p className="text-xs sm:text-sm text-[#536159]">
+                Please visit the official J&amp;K Police website to confirm current contact details,
+                availability and procedures.
+              </p>
+            </div>
+
+            {filteredPoliceResources.length === 0 ? (
+              <div className="rounded-xl border border-[#CFDDD4] bg-[#FFFFFF] p-6 text-center text-sm text-[#536159]">
+                No matching J&amp;K Police resource links found for your search.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredPoliceResources.map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-xl border border-[#CFDDD4] bg-[#FFFFFF] p-6 flex flex-col justify-between gap-4"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-[#1D4D3A]">
+                          <Shield className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                          <span>{item.categoryLabel}</span>
+                        </span>
+                        <span className="font-mono text-[11px] text-[#8C4A1C]">
+                          {item.statusLabel}
+                        </span>
+                      </div>
+
+                      <h4 className="font-serif text-xl font-medium text-[#19211D] leading-snug">
+                        {item.name}
+                      </h4>
+
+                      <p className="text-sm leading-relaxed text-[#3B4A42]">{item.description}</p>
+
+                      <p className="text-xs leading-relaxed text-[#536159] pt-2 border-t border-[#E6EDE8]">
+                        {item.institutionalNote}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#E3ECE6] flex flex-wrap items-center justify-between gap-3">
+                      <a
+                        href={item.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-md bg-[#1D4D3A] hover:bg-[#143729] text-[#F6F9F7] text-xs font-medium transition-colors"
+                      >
+                        <span>{item.officialLinkLabel}</span>
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                      </a>
+                      <a
+                        href={item.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-[11px] text-[#536159] hover:text-[#1D4D3A] underline underline-offset-2 break-all"
+                      >
+                        {item.officialUrl}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Group 2: University & Campus Support */}
+          <div className="space-y-4 pt-4 border-t border-[#DFEAE3]">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#1D4D3A] font-semibold">
+                <GraduationCap className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Group 2</span>
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl font-medium text-[#19211D]">
+                2. University &amp; Campus Support
+              </h3>
+              <p className="text-xs sm:text-sm text-[#536159]">
+                Institutional committees for eligible students and university members. Students
+                should check the respective university&apos;s current procedures and eligibility.
+              </p>
+            </div>
+
+            {filteredUniversityResources.length === 0 ? (
+              <div className="rounded-xl border border-[#CFDDD4] bg-[#FFFFFF] p-6 text-center text-sm text-[#536159]">
+                No matching university support resources found for your search.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredUniversityResources.map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-xl border border-[#CFDDD4] bg-[#FFFFFF] p-6 flex flex-col justify-between gap-4"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-[#1D4D3A]">
+                          <GraduationCap className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                          <span>{item.categoryLabel}</span>
+                        </span>
+                        <span className="font-mono text-[11px] text-[#8C4A1C]">
+                          {item.statusLabel}
+                        </span>
+                      </div>
+
+                      <h4 className="font-serif text-xl font-medium text-[#19211D] leading-snug">
+                        {item.name}
+                      </h4>
+
+                      <p className="text-sm leading-relaxed text-[#3B4A42]">{item.description}</p>
+
+                      {item.publishedContactNote && (
+                        <div className="rounded-lg border border-[#E3ECE6] bg-[#F6F9F7] p-3.5 space-y-2 text-xs text-[#3B4A42]">
+                          <p className="font-semibold text-[#19211D]">{item.publishedContactNote}</p>
+                          <div className="flex flex-wrap items-center gap-2">
+                            {item.phones?.map((phone) => (
+                              <a
+                                key={phone.number}
+                                href={`tel:${phone.number.replace(/[^0-9+]/g, '')}`}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-md bg-[#1D4D3A] hover:bg-[#143729] text-[#F6F9F7] font-mono text-xs font-medium transition-colors"
+                              >
+                                <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                                <span>
+                                  {phone.label}: {phone.number}
+                                </span>
+                              </a>
+                            ))}
+                            {item.email && (
+                              <a
+                                href={`mailto:${item.email.address}`}
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-md border border-[#C3D3C9] bg-[#FFFFFF] hover:border-[#1D4D3A] text-[#19211D] font-mono text-xs font-medium transition-colors break-all"
+                              >
+                                <Mail
+                                  className="w-3.5 h-3.5 shrink-0 text-[#1D4D3A]"
+                                  aria-hidden="true"
+                                />
+                                <span>
+                                  {item.email.label}: {item.email.address}
+                                </span>
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      <p className="text-xs leading-relaxed text-[#536159] pt-2 border-t border-[#E6EDE8]">
+                        {item.institutionalNote}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#E3ECE6] flex flex-wrap items-center justify-between gap-3">
+                      <a
+                        href={item.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[38px] rounded-md border border-[#C3D3C9] bg-[#FFFFFF] hover:border-[#1D4D3A] text-[#1D4D3A] text-xs font-medium transition-colors"
+                      >
+                        <span>{item.officialLinkLabel}</span>
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                      </a>
+                      <a
+                        href={item.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-[11px] text-[#536159] hover:text-[#1D4D3A] underline underline-offset-2 break-all"
+                      >
+                        {item.officialUrl}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </section>
       </article>
     </div>
