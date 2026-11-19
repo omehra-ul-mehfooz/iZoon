@@ -6,6 +6,7 @@ interface EditorialImageProps {
   alt: string;
   caption?: string;
   aspectClass?: string;
+  imgClassName?: string;
   className?: string;
   fallbackBg?: string;
 }
@@ -15,6 +16,7 @@ export const EditorialImage: React.FC<EditorialImageProps> = ({
   alt,
   caption,
   aspectClass = 'aspect-[4/3]',
+  imgClassName = 'object-center',
   className = '',
   fallbackBg = 'bg-[#EFE7DC]',
 }) => {
@@ -29,7 +31,7 @@ export const EditorialImage: React.FC<EditorialImageProps> = ({
             alt={alt}
             referrerPolicy="no-referrer"
             onError={() => setHasError(true)}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${imgClassName}`}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-[#5A4D52] gap-2">

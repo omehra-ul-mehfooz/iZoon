@@ -153,11 +153,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-6">
               <div className="rounded-2xl border border-[#DFD1BF] bg-[#F4ECE2] p-4 sm:p-5">
                 <EditorialImage
-                  src="/src/assets/images/homepage_editorial_portrait_1794853690407.jpg"
-                  alt="A young woman seated calmly by a sunlit wooden library window with an open notebook and lowered phone"
-                  caption="Editorial portrait — stepping back from online noise to verify facts and protect personal dignity."
-                  aspectClass="aspect-[16/10]"
-                  className="text-[#5E4E54]"
+                  src="/assets/aistudio/dyd-discussion.jpg_d9ca2b5b.png"
+                  alt="Two female students engaged in an academic discussion with a teacher across a table with an open laptop"
+                  aspectClass="aspect-[4/3] rounded-xl"
+                  imgClassName="object-[50%_75%]"
+                  fallbackBg="bg-[#EFE7DC]"
                 />
               </div>
             </div>

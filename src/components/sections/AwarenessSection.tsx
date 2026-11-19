@@ -242,10 +242,11 @@ export const AwarenessSection: React.FC<AwarenessSectionProps> = ({ onNavigate }
 
             <div className="lg:col-span-6">
               <EditorialImage
-                src="/src/assets/images/awareness_editorial_newsroom_1794853690402.jpg"
-                alt="A journalist's wooden study desk bathed in warm terracotta afternoon light with an open broadsheet newspaper and notebook"
-                caption="Fig. 1.1 — Examining sources, intent, and evidence carefully before accepting or repeating claims."
+                src="/assets/aistudio/dyd-digital-awareness.jpg_b24a35b9.jpg"
+                alt="Three female students seated together at a wooden conference table with an open laptop during a digital awareness discussion"
+                caption="Fig. 1.1 — Examining digital information together supports informed learning and safer participation online."
                 aspectClass="aspect-[4/3]"
+                imgClassName="object-[50%_80%]"
                 className="text-[#5C4E45]"
                 fallbackBg="bg-[#EFE3D5]"
               />
